@@ -3,8 +3,8 @@
  * 
  * @author	Derek Brown <djb3718@rit.edu>
  * 
- * Purpose	Dynamic programming approach for finding the length of the longest
- * 			subsequence of numbers whose values are oscillating
+ * Purpose	Dynamic programming approach for finding the length of the
+ *		longest subsequence of numbers whose values are oscillating
  */
 
 import java.util.Scanner;
@@ -35,12 +35,12 @@ public class LongestOscillatingSubseq {
 	// Methods
 	
 	/**
-	 * Algorithm for finding the longest oscillating subsequence of numbers in
-	 * an array.
+	 * Algorithm for finding the longest oscillating subsequence of
+	 * numbers in an array.
 	 * 
-	 * @param O	Object containing information needed to solve the problem, such
-	 * 			as, the input array, the 'positive' solution array, and the
-	 * 			'negative' solution array.
+	 * @param O	Object containing information needed to solve the
+	 *		problem, such as, the input array, the 'positive'
+	 *		solution array, and the 'negative' solution array.
 	 */
 	public void longestOscSubSeq( LongestOscillatingSubseq O ) {
 		for( int i = 0 ; i < O.A.length ; i++ ) {
@@ -48,23 +48,25 @@ public class LongestOscillatingSubseq {
 			O.Sneg[i] = 1;
 			for( int j = 0 ; j < i ; j++ ) {
 				if( ( O.A[i] - O.A[j] ) > 0 ) {
-					O.Spos[i] = Math.max( O.Sneg[j]+1, O.Spos[i] );
+					O.Spos[i] =
+					Math.max( O.Sneg[j]+1, O.Spos[i] );
 				}//end if
 				else if( ( O.A[i] - O.A[j] ) < 0 ) {
-					O.Sneg[i] = Math.max( O.Spos[j]+1, O.Sneg[i] );
+					O.Sneg[i] =
+					Math.max( O.Spos[j]+1, O.Sneg[i] );
 				}//end else if
 			}//end for j
 		}//end for i
 	}//end longestOscSubSeq
 	
 	/**
-	 * Method for retrieving the length of the longest oscillating subsequence
-	 * from the solution arrays.
+	 * Method for retrieving the length of the longest oscillating
+	 * subsequence from the solution arrays.
 	 * 
 	 * @param solution1	The array containing the 'positive' solution.
 	 * @param solution2	The array containing the 'negative' solution.
 	 * 
-	 * @return			The length of the longest oscillating subsequence.
+	 * @return	The length of the longest oscillating subsequence.
 	 */
 	public int findMax( int[] solution1, int[] solution2 ) {
 		int max1 = -1;
@@ -114,9 +116,10 @@ public class LongestOscillatingSubseq {
 			values[i] = Integer.parseInt( input );
 		}//end for
 		sc.close();
-		LongestOscillatingSubseq O = new LongestOscillatingSubseq( values );
+		LongestOscillatingSubseq O =
+			new LongestOscillatingSubseq( values );
 		O.longestOscSubSeq( O );
 		int solution = O.findMax( O.Spos, O.Sneg );
-		System.out.println(solution);
+		System.out.println( solution );
 	}//end main
 }//end LongestOscillatingSubseq
